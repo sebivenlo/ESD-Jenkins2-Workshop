@@ -1,4 +1,4 @@
-version: "1.0"
+version: "2"
 
 networks:
   workshop-network:
@@ -6,22 +6,20 @@ networks:
 
 services:
   jenkins:
-    container-name: jenkins
-    build: ./jenkins
+    container_name: jenkins
+    image: jenkins/jenkins:lts
     ports: 
         - 8080:8080
         - 50000:50000
     volumes: 
-        - jenkins_home:/var/jenkins_home
+        - C:/Users/Nils/jenkins_home:/var/jenkins_home
     networks:
         - workshop-network
-
   glassfish:
-    container-name: glassfish
-    build: ./glassfish
+    container_name: glassfish
+    image: payara/server-full
     ports:
-        - 8080:8081
+        - 8081:8080
     networks:
-        -workshop-network
-        
+        - workshop-network
     
