@@ -1,0 +1,27 @@
+version: "1.0"
+
+networks:
+  workshop-network:
+     driver: bridge
+
+services:
+  jenkins:
+    container-name: jenkins
+    build: ./jenkins
+    ports: 
+        - 8080:8080
+        - 50000:50000
+    volumes: 
+        - jenkins_home:/var/jenkins_home
+    networks:
+        - workshop-network
+
+  glassfish:
+    container-name: glassfish
+    build: ./glassfish
+    ports:
+        - 8080:8081
+    networks:
+        -workshop-network
+        
+    
