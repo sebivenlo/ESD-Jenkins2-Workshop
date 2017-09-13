@@ -12,7 +12,7 @@ services:
         - 8080:8080
         - 50000:50000
     volumes: 
-        - C:/Users/Nils/jenkins_home:/var/jenkins_home
+        - "%HOMEPATH%/jenkins_home:/var/jenkins_home"
     networks:
         - workshop-network
   glassfish:
@@ -22,4 +22,3 @@ services:
         - 8081:8080
     networks:
         - workshop-network
-    
