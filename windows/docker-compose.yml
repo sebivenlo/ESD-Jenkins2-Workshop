@@ -5,20 +5,28 @@ networks:
      driver: bridge
 
 services:
-  jenkins:
-    container_name: jenkins
-    image: jenkins/jenkins:lts
-    ports: 
-        - 8080:8080
-        - 50000:50000
-    volumes: 
-        - "%HOMEPATH%/jenkins_home:/var/jenkins_home"
-    networks:
-        - workshop-network
-  glassfish:
-    container_name: glassfish
-    image: payara/server-full
-    ports:
-        - 8081:8080
-    networks:
-        - workshop-network
+    jenkins:
+        container_name: jenkins
+        image: jenkins/jenkins:lts
+        ports: 
+            - 8080:8080
+            - 50000:50000
+        volumes: 
+            - "%HOMEPATH%/jenkins_home:/var/jenkins_home"
+        networks:
+            - workshop-network
+    glassfish:
+        container_name: glassfish
+        image: payara/server-full
+        ports:
+            - 8081:8080
+        networks:
+            - workshop-network
+    sonarqube:
+        container_name: sonarqube
+        image: sonarqube
+        ports:
+            - 9000:9000
+        networks:
+            - workshop-network
+    
