@@ -15,6 +15,13 @@ services:
         - ~/jenkins_home:/var/jenkins_home
     networks:
         - workshop-network
+  database:
+    container_name: database
+    build: database
+    ports:
+        - 5432:5432
+    networks:
+        - workshop-network
   glassfish:
     container_name: glassfish
     image: payara/server-full
