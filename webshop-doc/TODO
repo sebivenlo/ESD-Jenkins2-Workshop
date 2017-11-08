@@ -1,0 +1,5 @@
+update schema drawing
+update class diagram
+API change: price reduction.
+observable product container.
+maybe:  cart is lazy, iventory  eager in db updates.

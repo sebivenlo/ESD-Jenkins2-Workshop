@@ -1,0 +1,41 @@
+% example use case or scenario.
+\begin{UseCase}{UC-1.1}{Customer make a purchase}{webshop}{1.0}{HOM}
+\Actors{Customer of webshop}
+\Description{Successful purchase of a product in webshop}
+\Preconditions{Customer is logged in.}
+\Scenario{%
+  \vspace{0.4\baselineskip}
+    \begin{enumerate*}
+    \item Customer visits sales page.
+    \item Customer selects a product for purchase.
+    \item System takes product, quantity 1 from inventory and puts it
+      (merges it) into cart.
+    \item System updates cart update time stamp.
+    \item Customer sets/updates the quantity of product.
+    \item System the takes the difference in products from the inventory
+      and puts them into the cart.
+    \item Customer can repeat above steps for other products.
+    \item Customer selects the order option.
+    \item System  empties the cart (modelling that
+      the cart stays at the shop, but the Customer receives the
+      goods.).
+    % \item System creates sales record for each product, quantity
+    %   tuple, recording total sales price per tuple and date/time of
+    %   purchase, and adds it as a sales record to the sales table.
+    \end{enumerate*}
+  }
+\Extensions{%
+  \vspace{0.4\baselineskip}
+  \begin{description*}
+  \item [3.1] This is the first product in the cart.
+    \begin{enumerate*}
+      \item System creates cart record in database and sets create time stamp
+        and update time stamp to now().
+    \end{enumerate*}
+  \end{description*}
+}
+\Exceptions{%
+-
+}
+\Result{Products are successfully purchased and booked as sales.}
+\end{UseCase}

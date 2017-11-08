@@ -1,0 +1,35 @@
+\providecommand\dbname{webshop}
+\subsection{Create and load the postgresql database \dbname}
+
+You must create a postgresql database named \Code{\dbname} and load it
+with the initial data. To do that follow these steps:
+\begin{enumerate*}\itemsep1pt\parskip0pt\parsep0pt
+\item Open the database GUI pgadmin III.
+\item Connect to the exam database. The user/role name is
+  \textbf{exam} with password \textbf{exam}.
+\item Open the \textit{servers} node, then open the server node \textit{exam}.
+\item In the object browser (left panel with tree like structure)
+  right-click on databases node in the tree and select \textbf{New database}
+\item In the \textit{new Database} dialog enter \textbf{\dbname} in
+  the name field and leave the rest to their defaults. Click Ok.
+  \begin{itemize}
+  \item Click on the \dbname database to activate the sql buttons.
+  \end{itemize}
+\item Select the execute sql button, the one with the magnifying
+  glass.
+\item Open the file browser (the folder icon).
+\item In the folder \Code{\ldots/dbscripts/} you find the file
+  {schema.sql}. Open, then execute it using the \textbf{ExecuteScript} button.
+\item In the object browser, you can now verify that the script
+  executed  successfully, by checking that the \dbname database exists
+  and the tables, views and sequences as are defined in the
+  script. 
+\end{enumerate*}
+
+When you want to restore the database to it's original state with a
+filled inventory, you can re-execute the schema.sql script in
+\textbf{pgAdmin III}.
+
+% To make the jdbc driver available to the projects, you should
+% first create a Netbeans Library, named as the one used in the project.
+% See the assessment website for the exact details.

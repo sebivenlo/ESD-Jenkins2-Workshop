@@ -1,0 +1,69 @@
+\section{SEN1 tasks}
+
+\subsection{Hints on your way of working}
+You can find the SEN1 tasks in the \Code{webshopModel} project.
+There are no SEN1 tasks in the webshop web project.
+
+Your task tags (\Code{//TODO}) can be found in the java classes. 
+
+In essence you should test and develop (yes in that order) 
+methods in the ProductContainer class. The tests and methods
+you have to program are marked as such in the source code.
+
+It is best to follow the given task numbering scheme, for instance task
+SEN1\_1 (the test) should be followed by SEN1\_1\_1 (the implementation
+to that test).
+
+\begin{center}
+{\large\bf\sffamily Important note: Work Test Driven}
+\end{center}
+
+Working test driven means:
+\begin{description}
+\item [Develop a test:] (Test one aspect of the method that must be
+  implemented). When the test compiles but fails (red) you have a
+  working test. Now commit with  log-comment \texttt{test {\color{red}red}}.
+  
+\item[Implement an aspect:] Now implement the aspect as in ``make the test
+  pass''. When it is green, again commit with  log-comment \texttt{test {\color{green}green}}.
+\item[Repeat:] The above until all aspects have tests and are implemented
+  and your world is green.
+\end{description}
+
+\begin{center}
+{\large\sffamily{}Commit after \textit{every successful run},  \textbf{red} or
+  \textbf{green}. A failing (red) test is good!\\Getting the test green
+  afterwards is only better if it was red before.}
+\end{center}
+
+Your development environment provides code coverage by means of the
+tikione/jacoco netbeans plugin. This can create html coverage reports
+which shows you what you missed, coverage wise.
+
+We have verified that you can achieve 100\% coverage on the
+\Code{webshop.business} package on a fully functional implementation.
+The coverage, without the tests you have to write (initial state of the
+project) is 0\% for the \Code{ProductContainer} class, when all tests \textit{outside}
+of the test class \Code{ProductContainerTest} are turned off by annotating
+them with \lstinline{@Ignore}.
+
+\subsection{Considerations in grading}
+The following aspects are considered in grading the SEN1 part:
+\begin{itemize}\itemsep1pt\parskip0pt\parsep0pt
+\item The functionality, efficiency and effectiveness of the
+  tests. In other words: the proper amount of tests, to cover each
+  aspect of the method under test and development.
+\item Whether the way of working (order of commits) can be considered
+  \textbf{``test driven''}. This mostly depends on if you committed
+  the test red and then green.
+\item Are the tests real? This is measured by breaking the system
+  under test, to verify that at least one test turns red for every
+  break in the implementation.
+\item The correct function of the system under test
+  \Code{ProductContainer}. This will be measured with our own tests.
+\item The code coverage of the student implementation by means of the
+  students test.
+\end{itemize}
+
+The complexity of the aspects is weighted in the grading. Preliminary
+weights are available in the code.

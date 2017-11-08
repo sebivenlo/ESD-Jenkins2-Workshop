@@ -1,0 +1,21 @@
+% example use case or scenario.
+\begin{UseCase}{UC-1.2}{Customer abandoned cart}{webshop}{1.0}{HOM}
+\Actors{- (Actions to be taken by the system autonomously)}
+\Description{System detects that a cart exceeds the configured
+  lifetime and transfers goods back to inventory}
+\Preconditions{Cart has exceeded lifetime}
+\Scenario{%
+  \vspace{0.4\baselineskip}
+    \begin{enumerate*}
+    \item The goods that are in the cart are transferred back to the inventory.
+    \item The product is deleted from the cart table.
+    \end{enumerate*}
+  }
+\Extensions{%
+-}
+\Exceptions{%
+-
+}
+\Result{The cart is emptied and removed, all goods reclaimed for other
+  (tentative) sales.}
+\end{UseCase}

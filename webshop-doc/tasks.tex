@@ -1,0 +1,98 @@
+\subsection{Hints on your way of working}
+You can find the SEN1 tasks in the \Code{webshopModel} project.
+There are no SEN1 tasks in the webshop web project.
+
+Your task tags (\Code{//TODO}) can be found in the Java classes. 
+
+In essence you should test and develop (yes in that order) 
+methods in the ProductContainer class. The tests and methods
+you have to program are marked as such in the source code.
+
+It is best to follow the given task numbering scheme, for instance task
+T01\_A (the test) should be followed by T01\_B (the implementation
+to that test).
+
+The projects are available in a repository, which resides on the USB
+stick as well. The projects have been checked out into a sandbox called
+\texttt{examproject} on your desktop. NetBeans will do the right thing
+if you \Code{svn commit} or \Code{svn checkout}. In this way you can
+use subversion as a safety net and also keep the good way of working
+of TDD: RED, GREEN, REFACTOR. 
+
+\begin{center}
+  {\large\bf\sffamily Important note: Work Test Driven}
+\end{center}
+
+Working test driven means:
+\begin{description*}
+\item [Develop a test:] (Test one aspect of the method that must be
+  implemented). When the test compiles but fails (red) you have a
+  working test. Now commit with  log-comment \texttt{test {\bfseries\color{BrickRed}red}}.
+  
+\item[Implement an aspect:] Now implement the aspect as in ``make the test
+  pass''. When it is green, again commit with  log-comment
+  \texttt{test {\bfseries\color{OliveGreen}green}}.
+\item[Repeat:] The above until all aspects have tests and are implemented
+  and your world is green.
+\end{description*}
+
+\begin{center}
+  {\large\sffamily{}Commit after \textit{every successful run},  \textbf{Red} or
+    \textbf{Green}. A failing (red) test is a good test!\\Getting the test green
+    afterwards is only better if it was red before.}
+\end{center}
+
+Your development environment provides code coverage by means of the
+tikione/jacoco netbeans plug-in. This can create html coverage reports
+which shows you what code you missed, test wise.
+
+If a test annoys you, you can temporarily switch it off by adding the
+\lstinline{@Ignore} to that test or even to the test class.
+
+\subsection{The tasks}
+
+All tasks are given as TODO's in the code, with the exception of the
+JSF pages. Some requirements are best described by referring to the
+opening figure of this document~\ref{fig:screenshot} on
+page~\pageref{fig:screenshot}: The screen shot mockup.
+
+The left hand side is the shop, top is inventory, bottom is cart.
+
+In the JSF pages you have to make sure that:
+\begin{itemize*}
+\item Only render an add or remove button, when it makes sense of the
+  user to press it. In particular:
+  \begin{itemize*}
+  \item The \textbf{Add to cart} button should only be rendered when the product
+    is 1. not yet in the car AND 2. the product is available in the inventory.
+  \item The text ``Not on stock'' should be rendered instead if the
+    product is sold out (qty in  inventory equals 0).
+  \item The text ``already in cart'' should be rendered when product
+    already in cart.
+  \item In the cart, the plus button on items should only be rendered
+    when there still is stock of said item.
+  \end{itemize*}
+\item On the invoice only render the SPECIAL PRICE and ``YOUR
+  ADVANTAGE WITH BONUS'' when the a special price code is activated.
+\item The BONUS code button (Activate) should result in activating
+  the discount code. The way the price advantage (for the customer) is
+  calculated depends on the special price calculator activated by the
+  given code.
+\end{itemize*}
+
+Before you start coding, you should generate the java-doc from the
+\Code{webshopModel2015}.
+\subsection*{The tasks:}
+\begin{description*}
+\item[T01\_x] \Code{Invoice.getLines()} + test. Use lambda in
+  implementation. 
+\item[T02\_x] \Code{Invoice.getTotalPriceIncludingVAT()} + test. Use lambda in implementation.
+\item[T03\_x] Database take implementation and test PGProductContainer.take(QueryHelper helper, Product product, int quantity);
+\item[T04\_x] \Code{NoVatOnFilms} special price calc impl and test. Use
+  lambda in the implementation.
+\item[T05\_x] TwoForOnePrice special price calc impl and test using
+  Mockito. Note that this special price calculator has one constructor
+  taking a product description/name (String). In the test you only
+  need to complete the \lstinline{@Before setUp()} method.
+\item[T06\_x] JSF Cart.xhtml (No tests).
+\end{description*}

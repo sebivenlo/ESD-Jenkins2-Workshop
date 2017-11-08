@@ -1,0 +1,157 @@
+\section{CRC cards}
+
+The business is about Cart, Inventory, Invoice, InvoiceLine,
+Product, ProductQuantity, SpecialPriceCalculator and VATLevel.
+
+The class, responsibilities and collaborations (CRC) are given
+below:
+
+\begin{crccard}
+  \CRC{Product}{business-product}{The good we sell}%
+  {
+    Product describes good and specifies
+    price (including VAT) and VATLevel.
+  }
+  {
+    InvoiceLine\\
+    VATLevel\\
+    Cart\\
+    Inventory
+  }
+\end{crccard}
+
+\begin{crccard}
+  \CRC{Invoice}{business-invoice}{The payment request to the buyer}%
+  {
+    Specifies the money amount we request for the price stated and the
+    VATLevel determined by financial law. Optionally states a special 
+    price or price reduction.
+  }{
+    InvoiceLine\\
+    VATLevel\\
+    Cart\\
+    SpecialPriceCalculator
+  }
+\end{crccard}
+
+\begin{crccard}
+  \CRC{InvoiceLine}{business-invoiceline}{Details of product, qty and
+    vat}
+  {
+    Specifies details of product, price and vat level
+  }{
+    Product\\
+    Invoice\\
+    VATLevel
+  }
+\end{crccard}
+
+\begin{crccard}
+  \CRC{Cart}{business-cart}{The virtual container the customer puts
+    the product,quantity tuple in.}%
+  {
+    Collects customer product selections and shows product and
+    quantity. 
+
+    Cart \textbf{is a} ProductContainer\footnote{This
+      relationship is a design aspect and should normally not go into
+      a crc card, but is mentioned here because this is an exam.}.    
+  }{
+    Inventory\\
+    Invoice\\
+    ProductContainer (super)
+  }
+\end{crccard}
+
+\begin{crccard}
+  \CRC{Inventory}{business-inventory}{The stock of products.
+  }%
+  {
+    Holds the products in quantities. Shows what is available at any
+    moment.\\
+    
+    Inventory \textbf{is a} ProductContainer\footnote{This
+      relationship is a design aspect and should normally not go into
+      a crc card, but is mentioned here because this is an exam.}.
+  }
+  {
+    Cart\\
+    ProductContainer (super)
+  }
+\end{crccard}
+
+\begin{crccard}
+  \CRC{SpecialPriceCalculator}{business-pricecalc}{
+    Computes a special price when the customer provides a bonus code
+}{
+  When the customer enters a bonus code, a special price will be
+  calculated.
+  
+  This price reduction in percent depends on the bonus code, but
+  the price calculation must always be calculated on the pre-VAT price.
+}{
+  Cart\\
+  Invoice\\
+  InvoiceLine
+}
+\end{crccard}
+
+In this exam, \Code{Cart} and \Code{Inventory} share a common super
+type, \Code{ProductContainer}. This is an attempt to keep design and
+implementation DRY\footnote{Don't Repeat Yourselves}.
+
+Both Cart and Inventory understand an \textit{ownership} concept.
+This makes it possible to connect a Cart and cart entry to each
+other. In a web implementation this can be used to either associate a
+web session or a revisiting customer to a cart. It also allows to have
+all cart-entries reside in one table.
+
+% In an ``in memory-only'' implementation, the cart and inventory could
+% simply be instances of ProductContainer. In an implementation using
+% some kind of persistence, like a relational database, the sub-types
+% specify table and persistence unit.
+
+\begin{crccard}
+  \CRC{ProductContainer}{design-product-container}{
+    Super type of \Code{Cart} and \Code{Inventory}.
+  }{
+    Both cart and inventory share the operations (take and merge),
+    so the implementation of \Code{Cart} and \Code{Inventory} can
+    mostly be given in this super\footnote{This
+      relationship is a design aspect and should normally not go into
+      a crc card, but is mentioned here because this is an exam.} type.
+  }{
+    Cart\\
+    Inventory
+  }
+\end{crccard}
+
+\begin{crccard}
+  \CRC{WebshopFacade}{web-webshopsession}{
+    Façade for use by the view implementation in MVC.
+  }{
+    Manipulates the product(s) by putting them from inventory to cart
+    or the other way around and represents a visit of a customer to
+    the shop.\\
+    Provides easy access point to all the functionality provided in the
+    business package and as such is the Model in MVC.
+  }{
+    Cart\\
+    Inventory\\
+    Invoice\\
+    SpecialPriceCalculator
+  }
+\end{crccard}
+
+All classes above are in the webshopmodel project.
+
+\begin{crccard}
+  \CRC{WebshopController}{web-webshopcontroller}{
+    The JSF managed bean}{
+    Webshopcontroller provides access for the JSF pages to business
+    logic. It is the controller in MVC. This is the only java class
+    that resides in the web shop project.
+  }{
+    WebshopFacade
+}
+\end{crccard}
