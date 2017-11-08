@@ -1,0 +1,82 @@
+-------------------------------------------------------------------------------
+Test set: webshop.persistence.inmemory.IMInvoiceMapperTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE! - in webshop.persistence.inmemory.IMInvoiceMapperTest
+testSaveAndLoad(webshop.persistence.inmemory.IMInvoiceMapperTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: not same invoice expected:<Invoice{number=1,
+ calculator=webshop.entities.Invoice$DefaultReduction@1e88b3c,
+ invoiceDate=2017-11-08
+lines:---
+	id	0
+	product	Product{id=3, description=Targa 911, vatLevel=HIGH, price=1230095}
+	quantity	1
+	invoiceId	0
+	salesPrice	1463813
+	vat	233718
+	id	0
+	product	Product{id=7, description=Objects First, vatLevel=LOW, price=4800}
+	quantity	1
+	invoiceId	0
+	salesPrice	5088
+	vat	288
+----}> but was:<Invoice{number=1,
+ calculator=webshop.entities.Invoice$DefaultReduction@6e1567f1,
+ invoiceDate=2017-11-08
+lines:---
+	id	0
+	product	Product{id=3, description=Targa 911, vatLevel=HIGH, price=1230095}
+	quantity	1
+	invoiceId	0
+	salesPrice	1463813
+	vat	233718
+	id	0
+	product	Product{id=7, description=Objects First, vatLevel=LOW, price=4800}
+	quantity	1
+	invoiceId	0
+	salesPrice	5088
+	vat	288
+----}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at webshop.persistence.inmemory.IMInvoiceMapperTest.testSaveAndLoad(IMInvoiceMapperTest.java:54)
+
+testLoadAll(webshop.persistence.inmemory.IMInvoiceMapperTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: invoices 1 are not same expected:<Invoice{number=4,
+ calculator=webshop.entities.Invoice$DefaultReduction@1e88b3c,
+ invoiceDate=2017-11-08
+lines:---
+	id	0
+	product	Product{id=3, description=Targa 911, vatLevel=HIGH, price=1230095}
+	quantity	1
+	invoiceId	0
+	salesPrice	1463813
+	vat	233718
+	id	0
+	product	Product{id=7, description=Objects First, vatLevel=LOW, price=4800}
+	quantity	1
+	invoiceId	0
+	salesPrice	5088
+	vat	288
+----}> but was:<Invoice{number=4,
+ calculator=webshop.entities.Invoice$DefaultReduction@3c0f93f1,
+ invoiceDate=2017-11-08
+lines:---
+	id	0
+	product	Product{id=3, description=Targa 911, vatLevel=HIGH, price=1230095}
+	quantity	1
+	invoiceId	0
+	salesPrice	1463813
+	vat	233718
+	id	0
+	product	Product{id=7, description=Objects First, vatLevel=LOW, price=4800}
+	quantity	1
+	invoiceId	0
+	salesPrice	5088
+	vat	288
+----}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at webshop.persistence.inmemory.IMInvoiceMapperTest.testLoadAll(IMInvoiceMapperTest.java:93)
+

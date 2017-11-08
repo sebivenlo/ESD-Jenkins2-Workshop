@@ -1,0 +1,76 @@
+-------------------------------------------------------------------------------
+Test set: webshop.business.WebshopFacadeTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 12, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in webshop.business.WebshopFacadeTest
+testGetInvoice(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testRemoveFromCart_Product(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testAddToCart_Product_int(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testActivateDiscountCode(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testGetInventory(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testSubmitOrder(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testGetCart(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testAbandonCart(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testAddToCart_Product(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testRemoveFromCart_Product_int(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testGetInvoiceData(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+
+testGetSessionID(webshop.business.WebshopFacadeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.WebshopFacadeTest.<init>(WebshopFacadeTest.java:23)
+

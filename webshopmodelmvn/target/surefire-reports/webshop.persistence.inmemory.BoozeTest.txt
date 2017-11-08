@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: webshop.persistence.inmemory.BoozeTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in webshop.persistence.inmemory.BoozeTest
+boozeInCartTest(webshop.persistence.inmemory.BoozeTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at webshop.persistence.inmemory.IMProductMapper.getProductById(IMProductMapper.java:108)
+	at webshop.persistence.inmemory.IMInventory.<init>(IMInventory.java:30)
+	at webshop.persistence.inmemory.BoozeTest.<init>(BoozeTest.java:21)
+

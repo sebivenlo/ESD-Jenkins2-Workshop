@@ -1,0 +1,94 @@
+-------------------------------------------------------------------------------
+Test set: webshop.persistence.pgdb.PGDBInvoiceMapperTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0.112 sec <<< FAILURE! - in webshop.persistence.pgdb.PGDBInvoiceMapperTest
+testGet(webshop.persistence.pgdb.PGDBInvoiceMapperTest)  Time elapsed: 0.022 sec  <<< ERROR!
+webshop.persistence.PersistenceException: doInsert failed with query "insert into test_cart (product_id,owner_session) select ?,? where not exists (select 1 from test_cart where product_id =? and owner_session=?)" with args [0, 1, 0, 1]
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:428)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:354)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:169)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:231)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:209)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:156)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:113)
+	at webshop.persistence.pgdb.PGDBInvoiceMapperTest.setUp(PGDBInvoiceMapperTest.java:63)
+
+testLoad(webshop.persistence.pgdb.PGDBInvoiceMapperTest)  Time elapsed: 0.009 sec  <<< ERROR!
+webshop.persistence.PersistenceException: doInsert failed with query "insert into test_cart (product_id,owner_session) select ?,? where not exists (select 1 from test_cart where product_id =? and owner_session=?)" with args [0, 1, 0, 1]
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:428)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:354)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:169)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:231)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:209)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:156)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:113)
+	at webshop.persistence.pgdb.PGDBInvoiceMapperTest.setUp(PGDBInvoiceMapperTest.java:63)
+
+testSaveAndLoad(webshop.persistence.pgdb.PGDBInvoiceMapperTest)  Time elapsed: 0.007 sec  <<< ERROR!
+webshop.persistence.PersistenceException: doInsert failed with query "insert into test_cart (product_id,owner_session) select ?,? where not exists (select 1 from test_cart where product_id =? and owner_session=?)" with args [0, 1, 0, 1]
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:428)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:354)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:169)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:231)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:209)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:156)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:113)
+	at webshop.persistence.pgdb.PGDBInvoiceMapperTest.setUp(PGDBInvoiceMapperTest.java:63)
+
+testGetInvoiceIDs(webshop.persistence.pgdb.PGDBInvoiceMapperTest)  Time elapsed: 0.006 sec  <<< ERROR!
+webshop.persistence.PersistenceException: doInsert failed with query "insert into test_cart (product_id,owner_session) select ?,? where not exists (select 1 from test_cart where product_id =? and owner_session=?)" with args [0, 1, 0, 1]
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:428)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:354)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:169)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:231)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:209)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:156)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:113)
+	at webshop.persistence.pgdb.PGDBInvoiceMapperTest.setUp(PGDBInvoiceMapperTest.java:63)
+
+testGetInvoiceTableName(webshop.persistence.pgdb.PGDBInvoiceMapperTest)  Time elapsed: 0.006 sec  <<< ERROR!
+webshop.persistence.PersistenceException: doInsert failed with query "insert into test_cart (product_id,owner_session) select ?,? where not exists (select 1 from test_cart where product_id =? and owner_session=?)" with args [0, 1, 0, 1]
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:428)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:354)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:169)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:231)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:209)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:156)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:113)
+	at webshop.persistence.pgdb.PGDBInvoiceMapperTest.setUp(PGDBInvoiceMapperTest.java:63)
+
+testGetInvoiceLineTableName(webshop.persistence.pgdb.PGDBInvoiceMapperTest)  Time elapsed: 0.008 sec  <<< ERROR!
+webshop.persistence.PersistenceException: doInsert failed with query "insert into test_cart (product_id,owner_session) select ?,? where not exists (select 1 from test_cart where product_id =? and owner_session=?)" with args [0, 1, 0, 1]
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:428)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:354)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:169)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:231)
+	at webshop.persistence.pgdb.QueryHelper.doInsert(QueryHelper.java:209)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:156)
+	at webshop.persistence.pgdb.PGDBProductContainer.merge(PGDBProductContainer.java:113)
+	at webshop.persistence.pgdb.PGDBInvoiceMapperTest.setUp(PGDBInvoiceMapperTest.java:63)
+

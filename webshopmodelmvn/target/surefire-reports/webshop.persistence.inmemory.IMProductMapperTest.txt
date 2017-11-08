@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: webshop.persistence.inmemory.IMProductMapperTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in webshop.persistence.inmemory.IMProductMapperTest
+testGetProductById_notexisting(webshop.persistence.inmemory.IMProductMapperTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at webshop.persistence.inmemory.IMProductMapper.getProductById(IMProductMapper.java:108)
+	at webshop.persistence.inmemory.IMProductMapperTest.testGetProductById_notexisting(IMProductMapperTest.java:75)
+
+testGetProductByDescriptionPriceVat(webshop.persistence.inmemory.IMProductMapperTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at webshop.persistence.inmemory.IMProductMapper.getProductById(IMProductMapper.java:108)
+	at webshop.persistence.inmemory.IMProductMapperTest.testGetProductByDescriptionPriceVat(IMProductMapperTest.java:53)
+

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <link href="resources/css/webshop.css" rel="stylesheet"/>
+        <title>SEBI Web shop  main page</title>
+    </h:head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <ui:insert name="header" id="header">
+                    <h:outputLabel value="Fontys SEBI Venlo Web Shop"/>
+                </ui:insert>
+            </div>
+            <div id="shop">
+                <ui:insert name="inventory" id="inv">
+                    <h:outputLabel value="Inventory"/>
+                </ui:insert>
+                <br/>
+                <ui:insert name="cart" id="crt">
+                    <h:outputLabel value="Cart"/>
+                </ui:insert>
+            </div>
+            <div id="sidebar">
+                <ui:insert name="invoice">
+                    <h:outputLabel value="Invoice"/>
+                </ui:insert>
+            </div>
+            <div id="footer">
+                <ui:insert name="footer">
+
+                    <h1 class="logo"> &copy; Fontys Hogeschool Venlo - 2015</h1>
+                    <h:outputLabel value="#{wsc.persistenceConfig}"/>
+                </ui:insert>
+            </div>
+        </div>
+    </body>
+</html>
+

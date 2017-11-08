@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: webshop.business.InventoryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in webshop.business.InventoryTest
+testToString(webshop.business.InventoryTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class webshop.persistence.inmemory.IMWebshopFactory
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:44)
+	at webshop.persistence.WebshopFactoryConfigurator.getFactory(WebshopFactoryConfigurator.java:28)
+	at webshop.business.InventoryTest.testToString(InventoryTest.java:29)
+
