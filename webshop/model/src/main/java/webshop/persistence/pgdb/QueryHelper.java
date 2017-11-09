@@ -1,5 +1,7 @@
 package webshop.persistence.pgdb;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,7 +39,7 @@ import webshop.persistence.mappers.PersistenceException;
  * @author hom
  */
 public final class QueryHelper implements AutoCloseable {
-
+    
     private Object[] lastArgs = null;
 
     /**
@@ -61,12 +63,12 @@ public final class QueryHelper implements AutoCloseable {
      * @return the connection.
      */
     public synchronized Connection createConnection() {
-        if ( null == connection ) {
+        if (null == connection) {
             try {
                 connection = dataSource.getConnection();
-                connection.setAutoCommit( false );
-            } catch ( SQLException ex ) {
-                throw wrapException( "create connection failed", ex );
+                connection.setAutoCommit(false);
+            } catch (SQLException ex) {
+                throw wrapException("create connection failed", ex);
             }
         }
         return connection;
@@ -82,7 +84,7 @@ public final class QueryHelper implements AutoCloseable {
      * none but is now.
      */
     public synchronized boolean isTransaction() {
-        if ( null != connection ) {
+        if (null != connection) {
             return true;
         } else {
             createConnection();
@@ -97,11 +99,11 @@ public final class QueryHelper implements AutoCloseable {
      * @param args the parameters
      * @throws PersistenceException exception with wrapped cause.
      */
-    public void doDelete( String query, Object... args ) {
+    public void doDelete(String query, Object... args) {
         boolean transactional = isTransaction();
-
-        doDelete( createConnection(), query, args );
-        if ( !transactional ) {
+        
+        doDelete(createConnection(), query, args);
+        if (!transactional) {
             commit();
         }
     }
@@ -115,14 +117,14 @@ public final class QueryHelper implements AutoCloseable {
      * @param args the parameters
      * @throws PersistenceException exception with wrapped cause.
      */
-    public void doDelete( Connection conn, String query, Object... args ) {
-        try ( PreparedStatement pst = conn.prepareStatement( query ) ) {
-            setStatementParameters( pst, args );
+    public void doDelete(Connection conn, String query, Object... args) {
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            setStatementParameters(pst, args);
             pst.executeUpdate();
-        } catch ( SQLException ex ) {
-            throw wrapException( "doDelete failed with query \"" + query
-                    + "\" with args " + Arrays.deepToString( args ),
-                    ex );
+        } catch (SQLException ex) {
+            throw wrapException("doDelete failed with query \"" + query
+                    + "\" with args " + Arrays.deepToString(args),
+                    ex);
         }
     }
 
@@ -136,12 +138,12 @@ public final class QueryHelper implements AutoCloseable {
      * parameter from the args list.
      * @throws SQLException when something goes wrong.
      */
-    PreparedStatement setStatementParameters( final PreparedStatement pst,
-            Object... args )
+    PreparedStatement setStatementParameters(final PreparedStatement pst,
+            Object... args)
             throws SQLException {
         int argNo = 1;
-        for ( Object arg : args ) {
-            pst.setObject( argNo++, arg );
+        for (Object arg : args) {
+            pst.setObject(argNo++, arg);
         }
         return pst;
     }
@@ -154,13 +156,13 @@ public final class QueryHelper implements AutoCloseable {
      * @param args parameters to query
      * @return result set created by query
      */
-    public ResultSet doSelect( String query, Object... args ) {
+    public ResultSet doSelect(String query, Object... args) {
         boolean transactional = isTransaction();
-        ResultSet rs = doSelect( createConnection(), query, args );
-        if ( !transactional ) {
+        ResultSet rs = doSelect(createConnection(), query, args);
+        if (!transactional) {
             commit();
         }
-
+        
         return rs;
     }
 
@@ -176,23 +178,23 @@ public final class QueryHelper implements AutoCloseable {
      * @param args the things to place instead of the question marks
      * @return a result set wrapper
      */
-    public ResultSet doSelect( Connection conn, String query,
-            Object... args ) {
+    public ResultSet doSelect(Connection conn, String query,
+            Object... args) {
         ResultSet resultSet = null;
-
+        
         try {
-            PreparedStatement pst = conn.prepareStatement( query );
-            setStatementParameters( pst, args );
-            System.out.println( "pst = " + pst );
+            PreparedStatement pst = conn.prepareStatement(query);
+            setStatementParameters(pst, args);
+            System.out.println("pst = " + pst);
             resultSet = pst.executeQuery();
-        } catch ( SQLException ex ) {
-            throw wrapException( "doSelect failed with query \"" + query
-                    + "\" with args " + Arrays.deepToString( args ),
-                    ex );
+        } catch (SQLException ex) {
+            throw wrapException("doSelect failed with query \"" + query
+                    + "\" with args " + Arrays.deepToString(args),
+                    ex);
         }
-
+        
         return resultSet;
-
+        
     }
 
     /**
@@ -202,15 +204,15 @@ public final class QueryHelper implements AutoCloseable {
      * @param args to the query
      * @return the result of the insert.
      */
-    public int doInsert( String query, Object... args ) {
+    public int doInsert(String query, Object... args) {
         boolean transactional = isTransaction();
-
+        
         Connection con = createConnection();
-        int result = doInsert( con, query, args );
-        if ( !transactional ) {
+        int result = doInsert(con, query, args);
+        if (!transactional) {
             commit();
         }
-
+        
         return result;
     }
 
@@ -223,18 +225,18 @@ public final class QueryHelper implements AutoCloseable {
      * @param args to the query
      * @return the result of the insert.
      */
-    public int doInsert( Connection conn, String query, Object... args ) {
+    public int doInsert(Connection conn, String query, Object... args) {
         int result = 0;
-
-        try ( PreparedStatement pst = conn.prepareStatement( query ); ) {
-            setStatementParameters( pst, args );
+        
+        try (PreparedStatement pst = conn.prepareStatement(query);) {
+            setStatementParameters(pst, args);
             result = pst.executeUpdate();
-        } catch ( SQLException ex ) {
+        } catch (SQLException ex) {
             String msg = "doInsert failed with query \"" + query
-                    + "\" with args " + Arrays.deepToString( args );
-            Logger.getLogger( QueryHelper.class.getName() )
-                    .log( Level.SEVERE, msg, ex );
-            throw wrapException( msg, ex );
+                    + "\" with args " + Arrays.deepToString(args);
+            Logger.getLogger(QueryHelper.class.getName())
+                    .log(Level.SEVERE, msg, ex);
+            throw wrapException(msg, ex);
         }
         return result;
     }
@@ -247,11 +249,11 @@ public final class QueryHelper implements AutoCloseable {
      * @param args parameters to the query
      * @return the result of the update statement
      */
-    public int doUpdate( String query, Object... args ) {
+    public int doUpdate(String query, Object... args) {
         boolean transactional = isTransaction();
-
-        int result = doUpdate( createConnection(), query, args );
-        if ( !transactional ) {
+        
+        int result = doUpdate(createConnection(), query, args);
+        if (!transactional) {
             commit();
         }
         return result;
@@ -266,17 +268,17 @@ public final class QueryHelper implements AutoCloseable {
      * @param args with these
      * @return the result of the update statement
      */
-    public int doUpdate( Connection conn, String query, Object... args ) {
+    public int doUpdate(Connection conn, String query, Object... args) {
         int result = 0;
-        try ( PreparedStatement pst = connection.prepareStatement( query ); ) {
-            setStatementParameters( pst, args );
+        try (PreparedStatement pst = connection.prepareStatement(query);) {
+            setStatementParameters(pst, args);
             result = pst.executeUpdate();
-        } catch ( SQLException ex ) {
-            throw wrapException( "doUpdate failed with query \"" + query
-                    + "\" with args " + Arrays.deepToString( args ),
-                    ex );
+        } catch (SQLException ex) {
+            throw wrapException("doUpdate failed with query \"" + query
+                    + "\" with args " + Arrays.deepToString(args),
+                    ex);
         }
-
+        
         return result;
     }
 
@@ -289,11 +291,11 @@ public final class QueryHelper implements AutoCloseable {
      * without parameters.
      * @throws java.sql.SQLException ...
      */
-    public void doDDL( String ddl ) throws
+    public void doDDL(String ddl) throws
             SQLException {
-        System.out.println( ddl + ";\n" );
-        try ( Connection con = dataSource.getConnection() ) {
-            con.prepareStatement( ddl ).execute();
+        System.out.println(ddl + ";\n");
+        try (Connection con = dataSource.getConnection()) {
+            con.prepareStatement(ddl).execute();
         }
     }
 
@@ -304,15 +306,15 @@ public final class QueryHelper implements AutoCloseable {
      * @param t cause is the wrapped exception
      * @return the wrapper with wrapped exception contained.
      */
-    public PersistenceException wrapException( String msg, Throwable t ) {
-        if ( t instanceof SQLException ) {
+    public PersistenceException wrapException(String msg, Throwable t) {
+        if (t instanceof SQLException) {
             rollbackAndClose();
         }
-        return new PersistenceException( msg, t );
+        return new PersistenceException(msg, t);
     }
-
+    
     private static volatile DataSource dataSource = null;
-
+    public static final String DBPROPFILE="/opt/payara41/deployments/webshop-db.properties";
     /**
      * Create a data source with fixed credentials. Sufficient for an exam where
      * we do not want to hassle with configuration files.
@@ -320,23 +322,23 @@ public final class QueryHelper implements AutoCloseable {
      * @return the new connection, configured and all
      */
     public static DataSource createDataSource() {
-        synchronized ( QueryHelper.class ) {
-            if ( null == dataSource ) {
+        synchronized (QueryHelper.class) {
+            if (null == dataSource) {
                 PGSimpleDataSource pds = new PGSimpleDataSource();
                 Properties props = new Properties();
-                try {
-                    props.load( QueryHelper.class.getClassLoader().
-                            getResourceAsStream( "resources/db.properties" ) );
-                    props.forEach( ( a, b ) -> {
-                        System.out.println( a + "->" + b );
-                    } );
-                } catch ( Exception ignored ) {
+                try (InputStream in = new FileInputStream(DBPROPFILE)){
+                    props.load(in);
+                    props.forEach((a, b) -> {
+                        System.out.println(a + "->" + b);
+                    });
+                } catch (Exception ignored) {
+                    System.err.println("cannot load props from file "+DBPROPFILE);
                 }
-                pds.setServerName( props.getProperty( "host", "localhost" ) );
-                pds.setDatabaseName( props.getProperty( "database",
-                                        "webshop" ) );
-                pds.setUser( props.getProperty( "user", "exam" ) );
-                pds.setPassword( props.getProperty( "password", "exam" ) );
+                pds.setServerName(props.getProperty("host", "localhost"));
+                pds.setDatabaseName(props.getProperty("database",
+                        "webshop"));
+                pds.setUser(props.getProperty("user", "exam"));
+                pds.setPassword(props.getProperty("password", "exam"));
                 dataSource = pds;
             }
         }
@@ -350,12 +352,12 @@ public final class QueryHelper implements AutoCloseable {
      * @return sequence value
      * @throws PersistenceException when something wrong
      */
-    public long getNextValue( String sequenceName ) {
+    public long getNextValue(String sequenceName) {
         String sql = "select nextval(?)";
-        ResultSetWrapper r = doSelectWrapped( sql, sequenceName );
+        ResultSetWrapper r = doSelectWrapped(sql, sequenceName);
         // move to first row.
         r.next();
-        long result = r.getLong( 1 ); // first and only column.
+        long result = r.getLong(1); // first and only column.
         return result;
     }
 
@@ -368,9 +370,9 @@ public final class QueryHelper implements AutoCloseable {
      * @param args to pass
      * @return wrapped result set
      */
-    public ResultSetWrapper doSelectWrapped( Connection conn, String query,
-            Object... args ) {
-        return new ResultSetWrapper( this, doSelect( conn, query, args ) );
+    public ResultSetWrapper doSelectWrapped(Connection conn, String query,
+            Object... args) {
+        return new ResultSetWrapper(this, doSelect(conn, query, args));
     }
 
     /**
@@ -381,9 +383,9 @@ public final class QueryHelper implements AutoCloseable {
      * @param args to pass
      * @return wrapped result set
      */
-    public ResultSetWrapper doSelectWrapped( String query, Object... args ) {
-        return new ResultSetWrapper( this, doSelect( createConnection(), query,
-                args ) );
+    public ResultSetWrapper doSelectWrapped(String query, Object... args) {
+        return new ResultSetWrapper(this, doSelect(createConnection(), query,
+                args));
     }
 
     /**
@@ -391,17 +393,17 @@ public final class QueryHelper implements AutoCloseable {
      */
     @Override
     public void close() {
-        if ( null != connection ) {
-
+        if (null != connection) {
+            
             try {
-                if ( !connection.getAutoCommit() ) {
+                if (!connection.getAutoCommit()) {
                     connection.commit();
                 }
-                if ( !connection.isClosed() ) {
+                if (!connection.isClosed()) {
                     connection.close();
                 }
-            } catch ( SQLException ex ) {
-                throw new PersistenceException( null, ex );
+            } catch (SQLException ex) {
+                throw new PersistenceException(null, ex);
             }
         }
         connection = null;
@@ -412,11 +414,11 @@ public final class QueryHelper implements AutoCloseable {
      * Commits for this helper.//, then nulls the connection.
      */
     public void commit() {
-        if ( null != connection ) {
+        if (null != connection) {
             try {
                 connection.commit();
-            } catch ( SQLException ex ) {
-                throw new PersistenceException( null, ex );
+            } catch (SQLException ex) {
+                throw new PersistenceException(null, ex);
             }
         }
         //connection = null;
@@ -426,18 +428,18 @@ public final class QueryHelper implements AutoCloseable {
      * Rolls back for this helper, then nulls the connection.
      */
     public void rollbackAndClose() {
-        if ( null != connection ) {
+        if (null != connection) {
             try {
                 connection.rollback();
-            } catch ( SQLException ex ) {
-                throw new PersistenceException( "failure on rollback", ex );
+            } catch (SQLException ex) {
+                throw new PersistenceException("failure on rollback", ex);
             }
         }
         //connection = null;
     }
-
+    
     public Object[] getLastArgs() {
         return lastArgs;
     }
-
+    
 }

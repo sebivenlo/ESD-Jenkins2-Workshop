@@ -8,10 +8,10 @@
     <packaging>war</packaging>
 
     <name>Webshop::Webshop</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <appName>webshop</appName>
     </properties>
     
     <dependencies>
@@ -30,6 +30,7 @@
     </dependencies>
 
     <build>
+    <finalName>${appName}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

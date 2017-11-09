@@ -1,8 +1,11 @@
 package webshop.controller;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Properties;
 
 import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
@@ -16,6 +19,8 @@ import webshop.persistence.mappers.AbstractWebshopFactory;
 import static webshop.persistence.mappers.WebshopFactoryConfigurator.*;
 import webshop.business.WebshopException;
 import webshop.business.WebshopFacade;
+import webshop.persistence.mappers.WebshopFactoryConfigurator;
+import webshop.persistence.pgdb.QueryHelper;
 
 /**
  * Implements the "inventory and cart" facelet and this managed bean conforming
@@ -50,28 +55,39 @@ import webshop.business.WebshopFacade;
  * @author hvd
  */
 @SessionScoped
-@Named( "wsc" )
+@Named("wsc")
 public class WebshopController implements Serializable {
 
-    //private static final String PERSISTENCE_CONFIG = MEMORY_CONFIG;
-    private static final String PERSISTENCE_CONFIG = DB_CONFIG;
+    private static final String PERSISTENCE_CONFIG;// = MEMORY_CONFIG;
+    //private static final String PERSISTENCE_CONFIG = DB_CONFIG;
 
+    static {
+        Properties props = new Properties();
+        try (InputStream in = new FileInputStream(QueryHelper.DBPROPFILE)) {
+            props.load(in);
+        } catch (Exception ex) {
+            System.err.println("Cannot read properties file "
+                    + QueryHelper.DBPROPFILE);
+        }
+        String cfg = props.getProperty("PERSISTENCE_CONFIG", "IM");
+        PERSISTENCE_CONFIG = cfg;
+    }
     private transient AbstractWebshopFactory factory = CONFIGURATOR.getFactory(
-            PERSISTENCE_CONFIG );
+            PERSISTENCE_CONFIG);
 
     private final WebshopFacade facade;
 
     public WebshopController() throws WebshopException {
         //this.factory = CONFIGURATOBONUSR.getFactory( DB_CONFIG );
-        facade = new WebshopFacade( factory );
+        facade = new WebshopFacade(factory);
     }
 
-    public String addToCart( Product product, int quantity ) {
+    public String addToCart(Product product, int quantity) {
 
         try {
-            facade.addToCart( product, quantity );
-        } catch ( WebshopException ex ) {
-            displayExceptionMessage( ex );
+            facade.addToCart(product, quantity);
+        } catch (WebshopException ex) {
+            displayExceptionMessage(ex);
         }
         return null;
     }
@@ -83,12 +99,12 @@ public class WebshopController implements Serializable {
      * @param quantity to remove
      * @return null (always).
      */
-    public String removeFromCart( Product product, int quantity ) {
+    public String removeFromCart(Product product, int quantity) {
 
         try {
-            facade.removeFromCart( product, quantity );
-        } catch ( WebshopException ex ) {
-            displayExceptionMessage( ex );
+            facade.removeFromCart(product, quantity);
+        } catch (WebshopException ex) {
+            displayExceptionMessage(ex);
         }
         return null;
     }
@@ -99,11 +115,11 @@ public class WebshopController implements Serializable {
      * @param product
      * @return null
      */
-    public String removeAllFromCart( Product product ) {
+    public String removeAllFromCart(Product product) {
         try {
-            facade.removeFromCart( product );
-        } catch ( WebshopException ex ) {
-            displayExceptionMessage( ex );
+            facade.removeFromCart(product);
+        } catch (WebshopException ex) {
+            displayExceptionMessage(ex);
         }
         return null;
     }
@@ -124,10 +140,10 @@ public class WebshopController implements Serializable {
      *
      * @param ex exception to process
      */
-    private void displayExceptionMessage( Exception ex ) {
-        FacesMessage message = new FacesMessage( ex.getMessage() + "\n"
-                + ex.getCause().getMessage() );
-        FacesContext.getCurrentInstance().addMessage( null, message );
+    private void displayExceptionMessage(Exception ex) {
+        FacesMessage message = new FacesMessage(ex.getMessage() + "\n"
+                + ex.getCause().getMessage());
+        FacesContext.getCurrentInstance().addMessage(null, message);
         FacesContext.getCurrentInstance().renderResponse();
     }
 
@@ -185,8 +201,8 @@ public class WebshopController implements Serializable {
      * @param product
      * @return true if so.
      */
-    public boolean isInCart( Product product ) {
-        return facade.getCart().contains( product );
+    public boolean isInCart(Product product) {
+        return facade.getCart().contains(product);
     }
 
     /**
@@ -203,8 +219,8 @@ public class WebshopController implements Serializable {
      *
      * @param discountCode to set
      */
-    public void setDiscountCode( String discountCode ) {
-        facade.setDiscountCode( discountCode );
+    public void setDiscountCode(String discountCode) {
+        facade.setDiscountCode(discountCode);
     }
 
     /**
@@ -232,9 +248,9 @@ public class WebshopController implements Serializable {
      * @param p product
      * @return true if it is
      */
-    public boolean isAvailable( Product p ) {
+    public boolean isAvailable(Product p) {
         ProductContainer pc = facade.getInventory();
-        return pc.contains( p ) && pc.count( p ) > 0;
+        return pc.contains(p) && pc.count(p) > 0;
     }
 
     /**
@@ -260,8 +276,8 @@ public class WebshopController implements Serializable {
         return facade.getCustomerBirthDay();
     }
 
-    public void setCustomerBirthDay( LocalDate bd ) {
-        facade.setCustomerBirthDay( bd );
+    public void setCustomerBirthDay(LocalDate bd) {
+        facade.setCustomerBirthDay(bd);
     }
 
     private static final long serialVersionUID = 1L;
