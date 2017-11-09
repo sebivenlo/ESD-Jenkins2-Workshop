@@ -1,0 +1,33 @@
+\providecommand\material{material}
+\begin{document}
+\pagenumbering{roman}
+% title on top
+\begin{center}\sffamily\bfseries\large\makeatletter\@title\makeatother
+\end{center}
+\begin{minipage}[c]{.55\linewidth}{\Large
+\sffamily\bfseries{}
+  {Student identification}}\\%\setlength\extrarowheight{.8\baselineskip}
+\sffamily\bfseries{}
+  \begin{tabularx}{\linewidth}{|p{25mm}|X|}\hline
+   \rowcolor{gray} {\color{white}Key} & {\color{white}Fill in at start of session.} \\%[\baselineskip]\hline
+    STICK NR&  \\\hline
+%%    Student Number & \StudentNumber\\\hline
+    Name & \\\hline%\color{black} the longest student name ever and then some.\\\hline
+    Signature & \\&\\\hline
+  \end{tabularx}
+\end{minipage}\rule{3em}{0pt}
+ \begin{minipage}[c]{.35\linewidth}
+\sffamily\bfseries{}
+\vspace{2mm}
+Teachers:\\
+\makeatletter\@author\makeatother
+\end{minipage}
+
+\input{assessmentintro}
+\clearpage
+\pagenumbering{arabic}
+\InputIfFileExists{gradingtable}{}{}
+\input{\material}
+\InputIfFileExists{appendices.tex}{}{}
+\Closing
+\end{document}

@@ -1,0 +1,67 @@
+% Look ma, UTF-8 äïüöë
+\section*{\NL{De assessment omgeving} \DE{Die
+    Assessmentumgebung}\EN{The assessment environment}}
+\EN{Every candidate shall use a personal laptop. During the assessment
+  that system will be running from the supplied 
+  \textbf{exam stick}, providing a working Linux-OS and containing everything you
+  need, such as:}
+\NL{Je maakt gebruik van je eigen laptop. Tijdens het
+  examen maak je gebruik van de ter beschikking gestelde \textbf{exam
+    stick}, waarop  linux draait en alles 
+  wat je verder voor het examen nodig hebt:}
+\DE{Sie benutzen einen eigenen Laptop. Während des Assessments
+  benutzen Sie den zur Verfügung gestellten \textbf{exam stick}, der
+  ein Linux mit allem, was Sie für das Assessment
+  brauchen, enthält:}
+  \begin{itemize}[noitemsep,nolistsep]
+  \item \EN{a web browser to read any provided documentation}
+    \NL{een web browser voor het doornemen van de beschikbare
+      documentatie}
+    \DE{Ein Webbrowser zum lesen der vorhandene Dokumentation }
+  \item \EN{an IDE}\NL{een IDE}\DE{eine IDE}
+  \end{itemize}
+\EN{You will work alone.}\NL{Je werkt individueel.}  \DE{Jeder arbeitet alleine.}
+
+\vspace{-.4\baselineskip}
+\subsection*{\NL{Kijk uit waar je typt}
+  \EN{Take care of where you type}
+  \DE{Passen Sie auf an welcher Stelle Sie eingeben}}
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \EN{The corrector will use the \textbf{editor-folds}\  to quickly find your
+      solution. In fact anything outside those folds is invisible to the
+      corrector or causes a lot of extra work.}
+    \DE{Der Korrektor wird die \textbf{editor-folds}\ benutzen um
+      Ihre Antwort schnell zu finden. Tatsächlich ist alles außerhalb
+      diese Folds für den Korrektor unsichtbar oder würde eine Menge
+      Mehraufwand nach sich ziehen.}
+    \NL{De corrector gebruikt de editor folds om je antwoord te vinden.
+      In feite is alles buiten de folds onzichtbaar voor de corrector of
+      zou veel extra werk veroorzaken.}
+    \EN{The correct and wrong way\footnote{if you have to write a Hello
+        World program} to use the editor folds can be seen in the next examples.}
+    \DE{Die richtige und falsche Art\footnote{Wenn Sie ein Hello World
+        Programm schreiben müssten.} die editor folds zu benutzen kann man
+      in den nachstehenden Beispielen sehen.}
+    \NL{De juiste en foute manier\footnote{wanneer je een hello world
+        programma moet schrijven} om de editor folds te gebruiken vind je
+      in onderstaande voorbeelden.}
+%    \vspace{-5mm}
+    \begin{lstlisting}[title={Proper way of using the editor-folds. Your solution INSIDE.},basicstyle={\scriptsize}]
+      //<editor-fold defaultstate="expanded" desc="PRO1_3; (1234567) Puk Piet ; WEIGHT 5">
+      //TODO complete a Hello world Method
+      System.out.println("Hello world"); // My solution
+      //</editor-fold>
+    \end{lstlisting}\vspace{-5mm}
+    \begin{lstlisting}[title={WRONG, WRONG, oooohhh this is sooo WRONG},basicstyle={\scriptsize}]
+      //<editor-fold defaultstate="expanded" desc="PRO1_3; (1234567) Puk Piet ; WEIGHT 5">
+      //TODO complete a Hello world Method
+
+      //</editor-fold>
+      System.out.println("Hello world"); // My solution is invisible to the corrector 
+    \end{lstlisting}
+  \end{minipage}
+\end{center}
+
+\ReadDocHint
+

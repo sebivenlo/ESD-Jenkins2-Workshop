@@ -1,0 +1,125 @@
+
+\newcounter{assignment}\renewcommand\theassignment{\arabic{assignment}}
+\newcounter{task}[assignment]\renewcommand\thetask{\Alph{task}}
+\newcounter{subtask}[task]%\renewcommand\thesubtask{\roman{subtask}}
+
+\newenvironment{assignment}[1]{%
+  \stepcounter{assignment}{\par\Large\sffamily\textbf{\EN{Assignment}\NL{Opgave}\DE{Aufgabe}~\theassignment:~#1}}
+}{%
+}
+\newenvironment{task}[1]{%
+  \stepcounter{task}{%
+    \par\addvspace{.5\baselineskip}\sffamily\textbf{{\color[gray]{.4}%
+        Task\_\theassignment\thetask:}~#1}}%  
+  \begin{list}{}{%
+      \setlength{\topsep}{0pt}%
+      \setlength{\leftmargin}{0em}%
+      \setlength{\listparindent}{0em}%
+      \setlength{\itemindent}{0em}%
+      \setlength{\parsep}{0pt}}%
+  \item}{%
+  \end{list}}
+\newenvironment{subtask}[1]{%
+  \stepcounter{subtask}{%
+  \par\par\addvspace{.5\baselineskip}\sffamily\textbf{{\color[gray]{.4}Task\_\theassignment\thetask\thesubtask}:}~\textbf{\itshape{}#1}\newline}{%
+}}
+
+%% simpler macros, in stead of environments
+\newcommand\Assignment[1]{%
+  \stepcounter{assignment}{\par\large\sffamily\textbf{\EN{Assignment}\NL{Opgave}\DE{Aufgabe}~\theassignment:~#1}}
+}
+\newcommand{\assigmnent}[1]{\stepcounter{assignment}\section[Assignment \arabic{assignment}]{Assignment \arabic{assignment} #1}}
+
+\newcommand{\Task}[1]{\stepcounter{task}\subsection[Task~\thetask]{Task~\thetask~#1}}
+\newcommand{\Subtask}[1]{\stepcounter{subtask}\subsubsection[Task~\thetask]{Task~\thetask\thesubtask~#1}}
+
+\def\ReadDocHint{
+  \begin{center}
+    \sffamily
+    \shadowbox{
+      \begin{minipage}{.95\linewidth}
+        \sffamily
+        \EN{\textbf{Hint:} before you start coding, build the javadoc and study that
+          first. \\
+          This will give you all the required documentation, without the
+          distraction of too much detail.}
+        \NL{\textbf{Hint:} voordat je begint met code kloppen doe je
+          er goed aan eerst de javadoc van het project te bouwen en
+          deze te bestuderen. Je hebt dan alle documentatie en geen last van afleiding door
+          de veelheid aan code details.}
+        \DE{\textbf{Tipp:} bevor Sie mit dem codieren anfangen,
+          sollten Sie tunlichts die Javadoc des Projekts bauen und
+          diese studieren.\\
+          Sie haben dann alle Dokumentation ohne von den Codedetails
+          abgelenkt zu werden.}
+
+        \vspace{.5\baselineskip}
+        \textbf{//TODO:}  
+        \EN{If working with NetBeans IDE, pressing \keys[,]{CTRL,6}
+          will show the list of tasks. Every task is marked with
+          \textbf{//TODO} and the task id. Typically you should work
+          in id order.}
+        \NL{Wanneer je IDE werkt , dan levert de toetscombinatie
+          \keys[,]{CTRL,6} het overzicht van de taken. Elke taak is
+          gemarkeerd met een \textbf{//TODO} and the task id. Normaal
+          gesproken werk je taken in taakvolgorde af.}
+        \DE{Wenn Sie mit NetBeans IDE arbeiten, zeigt dass Drücken der
+          Tastenkombination  \keys[,]{CTRL,6} die Aufgabenliste. Jede
+          Aufgabe hat eine Aufgaben-Id. Im Normalfall 
+          sollte man die Aufgaben in der Id-Reihenfolge abarbeiten.}
+    %   \end{minipage}}
+
+    % \shadowbox{
+%      \begin{minipage}{.95\linewidth}
+      \vspace{.5\baselineskip}
+        \textbf{\EN{Use the provided repository.}\NL{Gebruik de
+            gegeven repository.}\DE{Benutze das gegebene Repository.}}
+        \EN{For your convenience, the projects are committed to a
+          subversion repository residing on the USB stick in your home
+          directory. The projects on the desktop are the initial
+          checkouts.
+          You are advised to use the repository, by
+          \textbf{commiting regularly}, so that you can save
+          intermediate work and can roll back, in case of need. The use
+          of this repository is not mandatory, but is the only way to
+          show that you had had a working sub-solution at any time. In the
+          post production process we will make a final commit into this
+          repository and then use the HEAD as the correction
+          baseline. Working with subversion on the command line is remarkably easy:
+}
+        \NL{Voor je comfort zijn de projecten in een repository op de
+          USB stick opgeslagen. De projecten op de desktop zijn de
+          initiële checkouts. We raden je aan deze
+          repository te gebruiken om zodoende tussentijds werk op te kunnen
+          slaan en eventueel terug te kunnen rollen naar een eerdere
+          versie, in geval van nood. 
+          Het gebruik van de repository is
+          niet verplicht, maar het is wel de enige manier om aan te
+          tonen dat je een eventuele eerdere werkende versie had. In
+          de stappen na het assessment maken we een finale commit en
+          gebruiken die HEAD van de repository als de baseline voor de
+          correcties. Werken met subversion in de commandregel is heel
+        eenvoudig:}
+        \DE{Für Ihren Komfort sind die Projekte in einem Repository
+          auf dem USB-stick gespeichert. Die Projekte auf dem Desktop
+          sind die initiale checkouts. Wir raten die benutzung des
+          Repositories, um so zwischenzeitliche Versionen ihrer Arbeit
+          zu speichern und Notfalls dazu zurück rollen zu können. Die
+          Benutzung des Repositories ist nicht verpflichtend aber wohl
+          die einzige Art um zu zeigen dass man einen vorherige
+          ggF. funktionierende Version hatte. In den Schritte nach
+          dem Assessment machen wir ein letztes Commit, und benutzen
+          HEAD des Repsoitories als Baseline für die
+          Korrektur. Arbeiten mit subversion auf der Commandzeile ist
+          denkbar einfach:}
+
+          \framebox{
+          \begin{minipage}{.5\linewidth}\ttfamily\bfseries
+            svn up\\
+            svn ci -m'completed TASK\_1A'
+          \end{minipage}
+      }
+    \end{minipage}
+    }
+  \end{center}
+}
