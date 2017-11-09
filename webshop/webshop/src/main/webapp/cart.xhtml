@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <fieldset class="backgroundWhite">
+            <legend class="fieldsetText">
+                Your shopping cart <h:outputLabel value="(cartId = #{wsc.sessionId})"/></legend>
+            <h:graphicImage name="images/cart-empty-icon.png" rendered="#{wsc.cartEmpty}"/>
+            <h:outputLabel value="is empty" rendered="#{wsc.cartEmpty}"/>
+            <h:form id="cartform" rendered="#{!wsc.cartEmpty}">
+                <h:panelGroup id="cart">
+
+                    <h:dataTable value="#{wsc.cartContents}" var="cartitem" border="1" styleClass="table">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                            <h:outputLabel value="#{cartitem.product.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Description</f:facet>
+                            <h:outputLabel value="#{cartitem.product.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Quantity</f:facet> 
+                            <h:commandButton value="-" action="#{wsc.removeFromCart(cartitem.product, 1)}"/>&nbsp;&nbsp;
+                            <h:outputLabel value="#{cartitem.quantity}"/>&nbsp;&nbsp;
+                            <h:commandButton value="+" action="#{wsc.addToCart(cartitem.product, 1)}" disabled="#{!wsc.isAvailable(cartitem.product)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>  
+                            <h:commandButton value="Remove" action="#{wsc.removeAllFromCart(cartitem.product)}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <br/>
+                    <table width="100%">
+                        <tr>
+                            <td><h:outputLabel value="Discount code: " for="discountCode"/></td>
+                            <td><h:inputText id="discountCode" value="#{wsc.discountCode}"/>
+                                <h:commandButton value="Activate" action="#{wsc.activateDiscountCode()}"/></td>
+                        </tr>
+                        <tr>    
+                            <td><h:outputLabel value="Customer&lsquo; birthday: " for="cbirthday" rendered="#{wsc.ageCheckeRequired}"/></td>
+                            <td><h:inputText id="cbirthday" value="#{wsc.customerBirthDay}" converter="localdate" rendered="#{wsc.ageCheckeRequired}"/>
+                                <h:commandButton value="Check" rendered="#{wsc.ageCheckeRequired}" action="#{wsc.checkAge()}"/></td>
+                        </tr>
+                        <tr>
+                            <th><h:commandButton value="Abandon cart" action="#{wsc.abandonCart()}"/></th>
+                            <th><h:commandButton value="Submit order" action="#{wsc.submitOrder()}" disabled="#{!wsc.ageOk}"/></th>
+                        </tr>
+                    </table>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                </h:panelGroup>
+                <h:messages styleClass="errortext"/>
+            </h:form>
+        </fieldset>
+    </h:body>
+</html>
+
