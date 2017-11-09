@@ -1,6 +1,7 @@
 #!/bin/bash
 db=webshop
 echo $#
+rm -fr ${db}-schema
 if [ $# -ge 1 ]; then
     db=$1
 fi

@@ -1,5 +1,5 @@
 % example use case or scenario.
-\begin{UseCase}{UC-1.1}{Customer make a purchase}{webshop}{1.0}{HOM}
+\begin{UseCase}{UC-1.1}{Customer makes a purchase}{webshop}{1.0}{HOM}
 \Actors{Customer of webshop}
 \Description{Successful purchase of a product in webshop}
 \Preconditions{Customer is logged in.}
@@ -7,15 +7,17 @@
   \vspace{0.4\baselineskip}
     \begin{enumerate*}
     \item Customer visits sales page.
+    \item System creates an invoice.
     \item Customer selects a product for purchase.
     \item System takes product, quantity 1 from inventory and puts it
       (merges it) into cart.
+    \item System adds or updates invoice line in invoice.
     \item System updates cart update time stamp.
-    \item Customer sets/updates the quantity of product.
-    \item System the takes the difference in products from the inventory
-      and puts them into the cart.
-    \item Customer can repeat above steps for other products.
-    \item Customer selects the order option.
+    \item System sets/updates the quantity of product in inventory
+      and cart.
+    \item Customer can repeat steps 3-7 for other products.
+    \item Customer selects the submit option.
+    \item System persists the invoice.
     \item System  empties the cart (modelling that
       the cart stays at the shop, but the Customer receives the
       goods.).

@@ -6,27 +6,25 @@ The web frontend is implemented using JSF, the business logic part
 with handling the content of the shopping 
 cart and the inventory is implemented in simple java objects (Pojos).
 
-% You can consider this practicum exercise as a \textit{test exam}, with the
-% restriction that the number of tasks open in this version is way to
-% much for a real assessment.
-
-% The following learning goals are addresses in this \textit{test exam}:
-% \begin{itemize*}
-% \item Working in an existing application and understand the context.
-% \item Understanding an API.
-% \item Test Driven Development with unit testing.
-% \item Working with exceptions.
-% \item Using Java 8 $\lambda$-expressions and function references.
-% \item Using for-each loops.
-% \item Use and java 8 $\lambda$-expressions and the streams API.
-% \item Use of JDBC with a data source.
-% \item Use of JSF and JSF templating.
-% \item Use of the mock framework Mockito.
-% \end{itemize*}
+The following learning goals are addresses in this \textit{exam}:
+\begin{itemize*}
+\item Working in an existing application and understand the context.
+\item Understanding an API.
+\item Test Driven Development with unit testing.
+\item Working with polymorphic types.
+\item Working with exceptions.
+\item Writing and reading object stream files.
+\item Using Java 8 $\lambda$-expressions and function references.
+\item Using for loops and for each loops.
+\item Use and Java 8 $\lambda$-expressions and the Java 8 streams API.
+\item Use of JDBC with a data source.
+\item Use of JSF with a controller;%and JSF templating.
+\item Use of the mock framework Mockito.
+\end{itemize*}
 
 This document provides an overall view of the application, design and
 realisation. Details to the specific test and programming tasks can be
-found in the source code. It those places where a class implements or
+found in the source code. In those places where a class implements or
 overwrites a method, you can find the documentation of the method by
 clicking on the overwrite icon in the left gutter, between the source
 code line numbers. 
@@ -60,26 +58,25 @@ been created or updated for some time, called \textbf{cart lifetime}.
 Such a cart is to be emptied, by transferring all goods back to the 
 inventory and then deleting the cart.
 The cart's life time can be configured in the application at deployment time. 
-%\clearpage
+
+\begin{figure}
+  \centering
+  \includegraphics[angle=-90,width=.9\linewidth]{figures/assessment_napkin}
+  \caption{\label{fig:napkin} ``Napkin'' design }
+\end{figure}
+\clearpage
+
 \subsection{Basic but concrete scenarios}
 
 The two basic scenarios are given below.
-{\scriptsize
+{\small
 
 \InputAspect{uc-purchase}{Successfully purchase. Author HOM}
 }
 
-{\scriptsize
+{\small
 \InputAspect{uc-abandon}{Successfully purchase. Author HOM}
 }
-
-\begin{center}
-  \begin{figure}
-    \includegraphics[angle=-90,width=\textwidth]{figures/assessment_napkin}
-    \caption{\label{fig:napkin} ``Napkin'' design }
-  \end{figure}
-\end{center}
-
 
 \section{Design}
 \subsection{Simplifications}
@@ -103,9 +100,9 @@ the business component called \textbf{webshopModel}.
 The \textbf{webshop} is the web application which depends on this webshopModel. 
 
 \subsection{Design of the product container}
-Both cart and inventory can be considered as product containers,
-meaning they contain tuples of (product,quantity). 
-This tuple is modeled in a separate class \Code{ProductQuantity}. The 
+Both cart and inventory can be considered as \textit{product container},
+meaning they can contain tuples of (product,quantity). 
+This tuple is modelled in a separate class \Code{ProductQuantity}.
 
 The logical interaction between inventory and cart is a transfer of
 (product,quantity) information. Note however, that these two containers
@@ -129,17 +126,17 @@ quantity should be deleted from the cart.
 This matches the natural business situation that a quantity of zero in
 an inventory leaves the shelve space intact, only empty.
 
-In the cart however, the product, quantity tuple with quantity set to
+In the cart however, the (product, quantity) tuple with quantity set to
 zero has no meaning. 
 
 To support this difference in behaviour, the ProductContainer has a method
-called \Code{purge()} which removes any tuple having quantity equals
+called \Code{purge()}, which removes any tuple having quantity equals
 zero.
 
 Therefor: In the business logic one should call \Code{cart.purge()}, but never \Code{inventory.purge()};
 This difference between cart and inventory is expressed by the fact
-that the classes \Code{Inventory} and \Code{Cart} both subclass
-product container. See the class diagram in
+that the classes \Code{Inventory} and \Code{Cart} both inherit from
+\Code{ProductContainer}. See the class diagram in
 figure~\ref{fig:classdiagram}.
 
 
@@ -147,4 +144,4 @@ In chapter~\ref{sec:realisation} you see that the project provides two
 implementations for the persistence layer.
 
 In the database persistence implementation , the inventory is backed by table
-\texttt{inventory}, the cart by table \texttt{cart}.
+\texttt{inventory}, the cart by table \texttt{carts}.
