@@ -9,24 +9,25 @@ services:
     container_name: jenkins
     image: jenkins/jenkins:lts
     ports: 
-        - 8080:8080
+        - 8081:8080
         - 50000:50000
     volumes: 
         - ~/jenkins_home:/var/jenkins_home
     networks:
         - workshop-network
-  database:
-    container_name: database
-    build: database
-    ports:
-        - 5432:5432
-    networks:
-        - workshop-network
+  #database:
+   # container_name: database
+   # build: database
+   # ports:
+   #     - 5432:5432
+   # networks:
+   #     - workshop-network
   glassfish:
     container_name: glassfish
-    image: payara/server-full
+    image: payara/server-web
     ports:
-        - 8081:8080
+        - 8080:8080
+        - 4848:4848
     networks:
         - workshop-network  
   sonarqube:
