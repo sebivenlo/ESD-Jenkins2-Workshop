@@ -12,7 +12,14 @@ services:
             - 8081:8080
             - 50000:50000
         volumes: 
-            - "%HOMEPATH%/jenkins_home:/var/jenkins_home"
+            - ${HOME}/jenkins_home:/var/jenkins_home
+        networks:
+            - workshop-network
+    database:
+        container_name: database
+        build: database
+        ports:
+            - 5432:5432
         networks:
             - workshop-network
     glassfish:
